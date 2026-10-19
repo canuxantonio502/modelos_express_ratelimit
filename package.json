@@ -1,0 +1,29 @@
+{
+  "name": "modelos_express_ratelimit",
+  "version": "1.0.0",
+  "description": "Exercise on implementing Rate Limits using Node.js and Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js --quiet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/canuxantonio502/modelos_express_ratelimit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/canuxantonio502/modelos_express_ratelimit/issues"
+  },
+  "homepage": "https://github.com/canuxantonio502/modelos_express_ratelimit#readme",
+  "dependencies": {
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
