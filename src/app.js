@@ -1,7 +1,11 @@
 import express from 'express';
 import modelosRouter from './routes/modelos.routes.js'
 
+
+
 const app = express();
+
+app.use(express.json());
 
 app.get('/', (req, res)=>{
     res.send('Bienvenido a mi aplicación, aun estamos en progreso...');
