@@ -73,6 +73,44 @@ router.post('/', (req, res)=>{
     });
 });
 
+
+// PUT para actualizar un modelo ya existente
+router.put('/:id', (req, res)=>{
+    const idBuscado = parseInt(req.params.id, 10);
+
+    if(isNaN(idBuscado)){
+        return res.status(404).json({
+            exito: false,
+            error: 'El parámetro ID deber ser un número entero válido.'
+        });
+    }
+
+    const indice = modelos.findIndex((m) => m.id === idBuscado);
+
+    if(indice === -1){
+        return res.status(404).json({
+            exito:false,
+            error: `No se puede actualizar: No se encontró ningún modelo con id ${idBuscado}.`
+        });
+    }
+
+    const { nombre, gama, especificaciones } = req.body;
+
+    modelos[indice] = {
+        id: idBuscado,
+        nombre: nombre.trim(),
+        gama: gama.trim(),
+        especificaciones: especificaciones
+    };
+
+    res.status(200).json({
+        exito: true,
+        mensaje: 'Modelo actualizado correctamente.',
+        modelo: modelos[indice]
+    });
+});
+
+
 // console.log(modelos);
 
 export default router;
