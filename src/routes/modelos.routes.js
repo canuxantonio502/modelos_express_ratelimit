@@ -111,6 +111,35 @@ router.put('/:id', (req, res)=>{
 });
 
 
+// DELETE para borrar un modelo
+router.delete('/:id', (req, res)=> {
+    const idBuscado = parseInt(req.params.id, 10);
+
+    if(isNaN(idBuscado)){
+        res.status(404).json({
+            exito: false,
+            error: `No se encontró ningun modelo con ID ${idBuscado}.`
+        });
+    }
+
+    const indice = modelos.findIndex((m)=> m.id === idBuscado);
+
+    if(indice === -1){
+        return res.status(404).json({
+            exito:false,
+            error: `No se puede eliminar: No se encontró ningún modelo con id ${idBuscado}.`
+        });
+    }
+
+    const [modeloEliminado] = modelos.slice(indice, 1);
+
+    res.status(200).json({
+        exito: true,
+        mensaje: 'Modelo elimindado exitosamente',
+        modelo: modeloEliminado
+    });
+});
+
 // console.log(modelos);
 
 export default router;
