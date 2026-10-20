@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { modelos } from '../data/modelosHonor.db.js';
+import { validarModelos } from '../middlewares/validator.js';
 
 const router = Router();
 
@@ -49,7 +50,7 @@ router.get('/:id', (req, res)=>{
 
 
 // POST un nuevo modelo
-router.post('/', (req, res)=>{
+router.post('/', validarModelos, (req, res)=>{
     const { nombre, gama, especificaciones } = req.body;
 
     const nuevoId = 
@@ -75,7 +76,7 @@ router.post('/', (req, res)=>{
 
 
 // PUT para actualizar un modelo ya existente
-router.put('/:id', (req, res)=>{
+router.put('/:id', validarModelos, (req, res)=>{
     const idBuscado = parseInt(req.params.id, 10);
 
     if(isNaN(idBuscado)){
