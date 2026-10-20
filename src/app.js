@@ -1,6 +1,6 @@
 import express from 'express';
-import modelosRouter from './routes/modelos.routes.js'
-
+import modelosRouter from './routes/modelos.routes.js';
+import { apiLimit } from './middlewares/rateLimiter.js';
 
 
 const app = express();
@@ -10,6 +10,8 @@ app.use(express.json());
 app.get('/', (req, res)=>{
     res.send('Bienvenido a mi aplicación, aun estamos en progreso...');
 });
+
+app.use('/api/', apiLimit)
 
 app.use('/api/modelos', modelosRouter)
 

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { modelos } from '../data/modelosHonor.db.js';
 import { validarModelos } from '../middlewares/validator.js';
+import { crearModeloLimit } from '../middlewares/rateLimiter.js';
 
 const router = Router();
 
@@ -50,7 +51,7 @@ router.get('/:id', (req, res)=>{
 
 
 // POST un nuevo modelo
-router.post('/', validarModelos, (req, res)=>{
+router.post('/', crearModeloLimit, validarModelos, (req, res)=>{
     const { nombre, gama, especificaciones } = req.body;
 
     const nuevoId = 
@@ -132,7 +133,7 @@ router.delete('/:id', (req, res)=> {
         });
     }
 
-    const [modeloEliminado] = modelos.slice(indice, 1);
+    const [modeloEliminado] = modelos.splice(indice, 1);
 
     res.status(200).json({
         exito: true,

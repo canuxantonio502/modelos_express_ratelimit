@@ -22,8 +22,8 @@ export function validarModelos(req, res, next){
         });
     }
 
-    if (!Array.isArray(especificaciones) || especificaciones.lengt === 0 || especificaciones.some(
-        (item) => typeof item !== 'string' || item.trim().length === 0
+    if ( typeof especificaciones !== 'object' || especificaciones === null || Array.isArray(especificaciones) || Object.keys(especificaciones).length === 0 || Object.values(especificaciones).some(
+        (value) => typeof value !== 'string' || value.trim().length === 0
         )
     ) {
         return res.status(400).json({
