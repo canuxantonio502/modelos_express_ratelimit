@@ -2,6 +2,7 @@ import express from 'express';
 import modelosRouter from './routes/modelos.routes.js';
 import { apiLimit } from './middlewares/rateLimiter.js';
 import { logger } from './middlewares/logger.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 
 
 const app = express();
@@ -25,6 +26,9 @@ app.use((req, res)=>{
         error: `La ruta ${req.method} no existe dentro del servidor de modelos.`
     });
 });
+
+
+app.use(errorHandler);
 
 app.listen(PORT, ()=>{
     console.log(`Servicio inicializado en http://localhost:${PORT}`);
