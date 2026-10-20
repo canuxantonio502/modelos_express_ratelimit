@@ -36,7 +36,7 @@ router.get('/:id', (req, res)=>{
     const modeloEncontrado = modelos.find((m) => m.id === idBuscado);
 
     if (!modeloEncontrado){
-        res.status(404).json({
+        return res.status(404).json({
             exito: false,
             error: `No se encontró ningún modelo con ID ${idBuscado}.`
         });
@@ -118,7 +118,7 @@ router.delete('/:id', (req, res)=> {
     const idBuscado = parseInt(req.params.id, 10);
 
     if(isNaN(idBuscado)){
-        res.status(404).json({
+        return res.status(404).json({
             exito: false,
             error: `No se encontró ningun modelo con ID ${idBuscado}.`
         });
